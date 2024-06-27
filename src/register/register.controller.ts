@@ -1,8 +1,9 @@
 import { Controller, HttpStatus } from "@nestjs/common";
-import { RegisterService } from "./register.service";
 import { MessagePattern, Payload } from "@nestjs/microservices";
 import { RegisterDTO } from "./dto/register.dto";
 import { RegisterMSG } from "src/common/constants";
+import { RegisterService } from "./register.service";
+import { IRegister } from "src/common/interfaces/register.interface";
 
 @Controller()
 export class RegisterController {
@@ -40,4 +41,28 @@ export class RegisterController {
       payload.userId,
     );
   }
+
+  @MessagePattern(RegisterMSG.UPDATE_PARTIAL)
+  async updatePartial(payload: { id: string; updateRegisterDto: { checkOut: Date } }): Promise<IRegister> {
+    console.log('Recibiendo solicitud de actualización parcial:', payload);
+    const { id, updateRegisterDto } = payload;
+    return this.registerService.updatePartial(id, updateRegisterDto);
+  }
+  
+  @MessagePattern(RegisterMSG.FIND_SCHEDULE)
+  findSchedule(payload: { start: string; end: string }): Promise<IRegister[]> {
+    const start = new Date(payload.start);
+    const end = new Date(payload.end);
+    console.log('Buscando horarios con start:', start, 'y end:', end);
+    return this.registerService.findSchedule(start, end);
+  }
+
+  @MessagePattern(RegisterMSG.FIND_SCHEDULE_ID)
+  findScheduleById(payload: { start: string; end: string; id: string }): Promise<IRegister[]> {
+    const start = new Date(payload.start);
+    const end = new Date(payload.end);
+    console.log('Buscando horarios con start:', start, ', end:', end, 'y id:', payload.id);
+    return this.registerService.findScheduleById(start, end, payload.id);
+  }
+
 }

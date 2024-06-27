@@ -1,10 +1,20 @@
-import { IUser } from "./user.interface";
+import { Document } from 'mongoose';
 
 export interface IRegister extends Document {
   _id?: string;
   name: string;
   city: string;
-  //registerDate: Date;
-  users: IUser[];
-  //users?: string; // ID del usuario
+  checkIn: Date;
+  checkOut: Date;
+  userId: string; 
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+  coordinatesOut:{
+    latitude: number;
+    longitude: number;
+  };
+  edited:boolean;
+  editedBy:string;
 }
