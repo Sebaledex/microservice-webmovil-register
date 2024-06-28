@@ -17,4 +17,5 @@ export interface IRegister extends Document {
   };
   edited:boolean;
   editedBy:string;
+  workedHours: number;
 }

@@ -16,5 +16,6 @@ export class RegisterDTO {
   };
   readonly edited:boolean;
   readonly editedBy: string;
+  readonly workedHours: Number;
 }
   

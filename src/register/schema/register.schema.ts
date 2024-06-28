@@ -18,6 +18,8 @@ export const RegisterSchema = new mongoose.Schema(
     },
     edited: { type: Boolean, default: false },
     editedBy: { type: String, default: ''},
+    workedHours: { type: Number, default: 0},
+
   },
   { timestamps: true },
 );
