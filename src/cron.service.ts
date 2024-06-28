@@ -16,7 +16,7 @@ export class CronService {
 
   //@Cron('0 23 * * *') // Ejecutar cada a las 23:00 horas 
   // @Cron('0 0 * * *') // Ejecutar cada 24 horas
-  @Cron('*/30 * * * *')  // Ejecutar cada minuto 30  //ocupar para probar
+  @Cron('*/30 * * * *')  // Ejecutar cada minuto 30  
   async handleCron() {
     console.log('Cron job running to update RegisterSchema records');
 
