@@ -18,11 +18,15 @@ export class RegisterService {
   }
 
   async create(registerDTO: RegisterDTO): Promise<IRegister> {
+    const currentDate = new Date();
+    const checkInDate = new Date(currentDate.setHours(currentDate.getHours() - 4));
+    
     const newRegister = new this.model({
       ...registerDTO,
-      checkIn: new Date(),
+      checkIn: checkInDate,
       checkOut: null,
     });
+    
     return await newRegister.save();
   }
 
